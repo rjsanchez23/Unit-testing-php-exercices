@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mpwar\\": "src/Mpwar"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MpwarTest\\": "test/MpwarTest/Unit"
+        }
+    }
+}
