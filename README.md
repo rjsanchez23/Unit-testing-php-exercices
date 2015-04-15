@@ -1,5 +1,5 @@
-# MPWAR - Ricardo S�nchez
-> rjsanchezestevez@gmail.com
+# MPWAR - Ricardo S�nchez
 
-## Set Up
-loquesea
+
+## Berlin
+> By Iván Fernández, Andrés Cavero, Ricardo Sánchez
