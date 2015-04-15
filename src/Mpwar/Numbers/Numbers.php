@@ -9,5 +9,15 @@ final class Numbers
             return array_merge($numbers, $numbers);
         }
 
+        if('s' == $operations){
+            $resultSum = 0;
+            foreach($numbers as $number){
+                $resultSum += $number;
+            }
+
+            array_unshift($numbers, $resultSum);
+            return $numbers;
+        }
+
     }
 }

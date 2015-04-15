@@ -13,16 +13,18 @@ final class NumbersTest extends \PHPUnit_Framework_TestCase
         $number = new Numbers;
         $resultArray = $number->handleList([1,2,3,4,5], 'x');
 
-        $this->assertTrue(($originalArray == $resultArray), "Duplicates the list");
+        $this->assertTrue(($originalArray == $resultArray), "duplicates the list");
     }
 
     /** @test */
-   /* public function shouldCreateNewEntry()
+    public function shouldCreateNewEntry()
     {
-        $originalArray = [1,2,3,4,5,1,2,3,4,5];
+        $numberToEntry = 15;
         $number = new Numbers;
-        $resultArray = $number->handleList([1,2,3,4,5], 'x');
+        $resultArray = $number->handleList([1,2,3,4,5], 's');
 
-        $this->assertTrue(($originalArray == $resultArray), "Duplicates the list");
-    }*/
+        $this->assertTrue(($numberToEntry == $resultArray[0]),"Creates a new entry at the beginning of the list containing the sum of all the list numbers" );
+
+
+    }
 }
