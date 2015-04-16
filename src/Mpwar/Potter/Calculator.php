@@ -3,7 +3,8 @@
 namespace Mpwar\Potter;
 
 
-class Calculator {
+class Calculator
+{
 
     const BOOK_1 = 'Harry Potter and the Philosopher\'s Stone';
     const BOOK_2 = 'Harry Potter and the Chamber of Secrets';
@@ -16,30 +17,56 @@ class Calculator {
     private $booksCollection = [];
 
 
-
-    public function buyBook($book){
+    public function buyBook($book)
+    {
 
         $this->booksCollection[] = $book;
 
-        if(count($this->booksCollection) == 1){
+        if (count($this->booksCollection) == 1) {
             return self::BOOK_PRICE;
         }
 
-        if(!$this->collectionHasDuplicates($this->booksCollection)){
+        if (!$this->collectionHasDuplicates($this->booksCollection)) {
             return $this->calculateDifferentBooks($this->booksCollection);
         }
 
-    }
-    private function collectionHasDuplicates(Array $booksCollection){
-
-        return count(array_unique($booksCollection))<count($booksCollection);
-
-    }
-    private function calculateDifferentBooks($temporalBooksCollection){
-
-        $percent = 1-(((count($temporalBooksCollection)-1) * 5)/100);
-        return ( count($temporalBooksCollection) * self::BOOK_PRICE * $percent );
+        if ($this->collectionAreAllTheSameBook($this->booksCollection)) {
+            return $this->calculateSameBooks($this->booksCollection);
+        }
 
     }
+
+    private function collectionAreAllTheSameBook(Array $booksCollection)
+    {
+        $result = true;
+        $book = $booksCollection[0];
+        foreach($booksCollection as $currentBook){
+            if($book != $currentBook){
+                $result = false;
+                break;
+            }
+        }
+        return $result;
+
+    }
+
+    private function collectionHasDuplicates(Array $booksCollection)
+    {
+
+        return count(array_unique($booksCollection)) < count($booksCollection);
+
+    }
+
+    private function calculateDifferentBooks($booksCollection)
+    {
+        $percent = 1 - (((count($booksCollection) - 1) * 5) / 100);
+        return (count($booksCollection) * self::BOOK_PRICE * $percent);
+    }
+
+    private function calculateSameBooks($booksCollection)
+    {
+        return (count($booksCollection) * self::BOOK_PRICE * 1);
+    }
+
 
 }
