@@ -16,6 +16,7 @@ class Calculator {
     private $booksCollection = [];
 
 
+
     public function buyBook($book){
 
         $this->booksCollection[] = $book;
@@ -23,9 +24,22 @@ class Calculator {
         if(count($this->booksCollection) == 1){
             return self::BOOK_PRICE;
         }
+
+        if(!$this->collectionHasDuplicates($this->booksCollection)){
+            return $this->calculateDifferentBooks($this->booksCollection);
+        }
+
     }
+    private function collectionHasDuplicates(Array $booksCollection){
 
+        return count(array_unique($booksCollection))<count($booksCollection);
 
+    }
+    private function calculateDifferentBooks($temporalBooksCollection){
 
+        $percent = 1-(((count($temporalBooksCollection)-1) * 5)/100);
+        return ( count($temporalBooksCollection) * self::BOOK_PRICE * $percent );
+
+    }
 
 }

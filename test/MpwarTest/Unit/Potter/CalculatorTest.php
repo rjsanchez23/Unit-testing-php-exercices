@@ -14,6 +14,18 @@ final class CalculatorTest extends \PHPUnit_Framework_TestCase
         $transformer = new Calculator;
         $result = $transformer->buyBook(Calculator::BOOK_1);
 
-        $this->assertSame(8, $result,  "Buying one or multiples of the same book does not earn a discount");
+        $this->assertSame(8, $result,  "Buying one book does not earn a discount");
+    }
+
+    /** @test */
+    public function shouldBuyMultiplesDifferentBooks()
+    {
+        $transformer = new Calculator;
+        $transformer->buyBook(Calculator::BOOK_1);
+        $transformer->buyBook(Calculator::BOOK_2);
+        $result = $transformer->buyBook(Calculator::BOOK_3);
+
+
+        $this->assertSame(21.6, $result,  "Buying multiples of different book has discount");
     }
 }
