@@ -1,5 +1,3 @@
-# MPWAR - Ricardo Sánchez
-> rjsanchezestevez@gmail.com
+# Making sure every possible path is covered
+> By Ricardo SÃ¡nchez
 
-## Set Up
-loquesea
