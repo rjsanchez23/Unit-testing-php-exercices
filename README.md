@@ -1,3 +1,5 @@
-# Making sure every possible path is covered
-> By Ricardo SÃ¡nchez
+# MPWAR - Ricardo Sánchez
+> rjsanchezestevez@gmail.com
 
+## Set Up
+loquesea
