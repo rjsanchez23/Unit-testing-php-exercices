@@ -15,7 +15,13 @@ final class DetectorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($isPalindrome, "The String should be a Palindrome");
     }
 
-    
+    /** @test */
+    public function ShouldBeFalse()
+    {
+        $detector = new Detector;
+        $isPalindrome = $detector->isPalindrome("mpwar");
+        $this->assertFalse($isPalindrome, "The String shouldn't be a Palindrome");
+    }
 
 
 }
