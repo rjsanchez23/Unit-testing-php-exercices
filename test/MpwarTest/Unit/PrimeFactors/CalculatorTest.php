@@ -17,5 +17,14 @@ final class CalculatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame([23], $result, "The given number is prime, so should return an array with only the same number");
     }
 
+    /** @test */
+    public function shouldNotBePrime()
+    {
+        $calculator = new Calculator();
+        $result = $calculator->calculate(32);
+
+        $this->assertSame([2, 2, 2, 2, 2], $result, "The given number is not prime, so should return an array with another numbers");
+    }
+
 
 }
