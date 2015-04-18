@@ -1,5 +1,5 @@
-# MPWAR - Ricardo Sánchez
-> rjsanchezestevez@gmail.com
+# To relax the eyes before going to bed
+> By Ricardo Sánchez
 
-## Set Up
-loquesea
+## Palindrome kata
+
