@@ -1,5 +1,4 @@
-# MPWAR - Ricardo Sánchez
-> rjsanchezestevez@gmail.com
+# Defining an acceptance threshold
+> By Ricardo Sï¿½nchez
 
-## Set Up
-loquesea
+## prime-factors kata
