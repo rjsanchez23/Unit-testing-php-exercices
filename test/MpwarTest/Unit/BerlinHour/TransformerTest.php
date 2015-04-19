@@ -72,4 +72,43 @@ final class TransformerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($timeArray["hours_5x"], $result["hours_5x"], "the lamp is off when second is even");
     }
+
+    /** @test */
+    public function shouldHaveThreeHoursOfValueOneLampOn()
+    {
+        $timeArray = [
+            'hours_1x' => '1100',
+        ];
+
+        $transformer = new Transformer;
+        $result = $transformer->fromDigitalToBerlin('17:00:00');
+
+        $this->assertEquals($timeArray["hours_1x"], $result["hours_1x"], "the lamp is off when second is even");
+    }
+
+    /** @test */
+    public function shouldHaveAllHoursOfValueOneLampOn()
+    {
+        $timeArray = [
+            'hours_1x' => '1111',
+        ];
+
+        $transformer = new Transformer;
+        $result = $transformer->fromDigitalToBerlin('24:00:00');
+
+        $this->assertEquals($timeArray["hours_1x"], $result["hours_1x"], "the lamp is off when second is even");
+    }
+
+    /** @test */
+    public function shouldHaveNoneHoursOfValueOneLampOn()
+    {
+        $timeArray = [
+            'hours_1x' => '0000',
+        ];
+
+        $transformer = new Transformer;
+        $result = $transformer->fromDigitalToBerlin('00:00:00');
+
+        $this->assertEquals($timeArray["hours_1x"], $result["hours_1x"], "the lamp is off when second is even");
+    }
 }

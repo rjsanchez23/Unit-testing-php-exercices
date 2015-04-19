@@ -29,6 +29,9 @@ final class Transformer
         $hours_5x = $this->hoursToLamp(floor($hours/5));
         $result["hours_5x"] = implode($hours_5x);
 
+        $hours_1x = $this->hoursToLamp(($hours % 5));
+        $result["hours_1x"] = implode(($hours_1x));
+
         return $result;
     }
 
