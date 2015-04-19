@@ -11,7 +11,8 @@ final class Transformer
     {
         list($hours, $minutes, $seconds) = explode(":",$time);
 
-        $result["seconds"]      = $this->lampsToStringConversion($seconds % 2, 1);
+        $isSecondsLampOn = ($seconds % 2)?0:1;
+        $result["seconds"]      = $this->lampsToStringConversion($isSecondsLampOn, 1);
         $result["hours_5x"]     = $this->lampsToStringConversion(floor($hours/5), 4);
         $result["hours_1x"]     = $this->lampsToStringConversion(($hours % 5), 4);
         $result["minutes_5x"]   = $this->lampsToStringConversion(floor($minutes/5), 11);

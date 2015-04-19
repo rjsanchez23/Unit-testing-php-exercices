@@ -12,7 +12,7 @@ final class TransformerTest extends \PHPUnit_Framework_TestCase
     public function shouldBeOdd()
     {
         $timeArray = [
-            'seconds' => '0',
+            'seconds' => '1',
         ];
 
         $transformer = new Transformer;
@@ -25,7 +25,7 @@ final class TransformerTest extends \PHPUnit_Framework_TestCase
     public function shouldBeEven()
     {
         $timeArray = [
-            'seconds' => '1',
+            'seconds' => '0',
         ];
 
         $transformer = new Transformer;
@@ -192,5 +192,51 @@ final class TransformerTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @test
+     * @dataProvider berlinClockProvider
+     */
+     public function mixedTestCases($input_time, $expected_result)
+     {
+         $transformer = new Transformer;
+         $result = $transformer->fromDigitalToBerlin($input_time);
 
+         $this->assertEquals($expected_result, $result, "Something went wrong with cases provided by berlinClockProvider");
+     }
+
+     public function berlinClockProvider()
+     {
+         return [
+             [
+                 '00:00:00',
+                 [
+                     'seconds'    => '1',
+                     'hours_5x'   => '0000',
+                     'hours_1x'   => '0000',
+                     'minutes_5x' => '00000000000',
+                     'minutes_1x' => '0000'
+                 ]
+             ],
+             [
+                 '17:23:45',
+                 [
+                     'seconds'    => '0',
+                     'hours_5x'   => '1110',
+                     'hours_1x'   => '1100',
+                     'minutes_5x' => '11110000000',
+                     'minutes_1x' => '1110'
+                 ]
+             ],
+             [
+                 '04:59:59',
+                 [
+                     'seconds'    => '0',
+                     'hours_5x'   => '0000',
+                     'hours_1x'   => '1111',
+                     'minutes_5x' => '11111111111',
+                     'minutes_1x' => '1111',
+                 ]
+             ]
+         ];
+     }
 }
