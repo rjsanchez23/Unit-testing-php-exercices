@@ -26,5 +26,14 @@ final class CalculatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame([2, 2, 2, 2, 2], $result, "The given number is not prime, so should return an array with another numbers");
     }
 
+    /** @test */
+    public function shouldBeZero()
+    {
+        $calculator = new Calculator();
+        $result = $calculator->calculate(0);
+
+        $this->assertSame([0], $result, "The given number is 0, so should return an array with 0");
+    }
+
 
 }
