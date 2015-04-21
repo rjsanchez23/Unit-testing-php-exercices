@@ -1,5 +1,5 @@
-# MPWAR - Ricardo Sánchez
-> rjsanchezestevez@gmail.com
+# MPWAR - Sign up use case
 
-## Set Up
-loquesea
+
+> First step towards a real application
+> By Ricardo SÃ¡nchez
