@@ -2,26 +2,22 @@
 
 namespace Mpwar\Auth;
 
-use Mpwar\Auth\Library\EmailValidator;
-use Mpwar\Auth\Library\PasswordValidator;
+use Mpwar\Auth\Library\UserCredentialsValidator;
 
 class SignUp
 {
-    private $emailValidator;
-    private $passwordValidator;
 
-    public function __construct(EmailValidator $emailValidator, PasswordValidator $passwordValidator)
+
+    private $userCredentialsValidator;
+
+    public function __construct(UserCredentialsValidator $userCredentialsValidator)
     {
-
-        $this->emailValidator = $emailValidator;
-        $this->passwordValidator = $passwordValidator;
-
+        $this->userCredentialsValidator = $userCredentialsValidator;
     }
 
     public function __invoke($email, $userName, $password)
     {
-        $this->emailValidator->validate($email);
-        $this->passwordValidator->validate($password);
+        $this->userCredentialsValidator->validate($email, $password);
 
     }
 

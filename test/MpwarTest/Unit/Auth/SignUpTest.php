@@ -5,6 +5,7 @@ namespace MpwarTest\SetUp;
 
 use InvalidArgumentException;
 use Mpwar\Auth\Library\PasswordValidator;
+use Mpwar\Auth\Library\UserCredentialsValidator;
 use Mpwar\Auth\SignUp;
 use PHPUnit_Framework_TestCase;
 use Mpwar\Auth\Library\EmailValidator;
@@ -14,12 +15,12 @@ final class SignUpTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function shouldFailIfEmailNotValid()
     {
-        $emailValidator_stub = $this->getMock(EmailValidator::class);
-        $passwordValidator_stub = $this->getMock(PasswordValidator::class);
 
-        $signUp = new SignUp($emailValidator_stub, $passwordValidator_stub);
+        $userCredentiaslsValidator_stub = $this->getMock(UserCredentialsValidator::class,[],[],"",false);
 
-        $emailValidator_stub
+        $signUp = new SignUp($userCredentiaslsValidator_stub);
+
+        $userCredentiaslsValidator_stub
             ->expects($this->any())
             ->method('validate')
             ->will(
@@ -39,12 +40,12 @@ final class SignUpTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function shouldFailIfPasswordNotValid()
     {
-        $emailValidator_stub = $this->getMock(EmailValidator::class);
-        $passwordValidator_stub = $this->getMock(PasswordValidator::class);
 
-        $signUp = new SignUp($emailValidator_stub, $passwordValidator_stub);
 
-        $passwordValidator_stub
+        $userCredentiaslsValidator_stub = $this->getMock(UserCredentialsValidator::class,[],[],"",false);
+        $signUp = new SignUp($userCredentiaslsValidator_stub);
+
+        $userCredentiaslsValidator_stub
             ->expects($this->any())
             ->method('validate')
             ->will(
