@@ -1,14 +1,15 @@
 <?php
 
-namespace MpwarTest\SetUp;
+namespace MpwarTest\Unit\Auth;
 
 
 use InvalidArgumentException;
-use Mpwar\Auth\Library\PasswordValidator;
-use Mpwar\Auth\Library\UserCredentialsValidator;
 use Mpwar\Auth\SignUp;
+use Mpwar\Auth\UserPost;
+use Mpwar\Library\UserCredentialsValidator;
+use Mpwar\User\User;
 use PHPUnit_Framework_TestCase;
-use Mpwar\Auth\Library\EmailValidator;
+
 
 final class SignUpTest extends PHPUnit_Framework_TestCase
 {
@@ -16,11 +17,11 @@ final class SignUpTest extends PHPUnit_Framework_TestCase
     public function shouldFailIfEmailNotValid()
     {
 
-        $userCredentiaslsValidator_stub = $this->getMock(UserCredentialsValidator::class,[],[],"",false);
+        $userCredentialsValidator_stub = $this->getMock(UserCredentialsValidator::class,["validate"],[],"",false);
+        $userPost_stub = $this->getMock(UserPost::class,["register"],[],"",false);
+        $signUp = new SignUp($userCredentialsValidator_stub, $userPost_stub);
 
-        $signUp = new SignUp($userCredentiaslsValidator_stub);
-
-        $userCredentiaslsValidator_stub
+        $userCredentialsValidator_stub
             ->expects($this->any())
             ->method('validate')
             ->will(
@@ -41,11 +42,12 @@ final class SignUpTest extends PHPUnit_Framework_TestCase
     public function shouldFailIfPasswordNotValid()
     {
 
+        $userCredentialsValidator_stub = $this->getMock(UserCredentialsValidator::class,["validate"],[],"",false);
+        $userPost_stub = $this->getMock(UserPost::class,["register"],[],"",false);
 
-        $userCredentiaslsValidator_stub = $this->getMock(UserCredentialsValidator::class,[],[],"",false);
-        $signUp = new SignUp($userCredentiaslsValidator_stub);
+        $signUp = new SignUp($userCredentialsValidator_stub, $userPost_stub);
 
-        $userCredentiaslsValidator_stub
+        $userCredentialsValidator_stub
             ->expects($this->any())
             ->method('validate')
             ->will(
@@ -60,6 +62,34 @@ final class SignUpTest extends PHPUnit_Framework_TestCase
         );
 
         $signUp('monesvol@mpwar.com', 'monesvol', 'S*cks');
+    }
+
+    /** @test */
+    public function shouldSuccessIfGotAUser()
+    {
+
+        $userCredentialsValidator_stub = $this->getMock(UserCredentialsValidator::class,["validate"],[],"",false);
+        $userPost_stub = $this->getMock(UserPost::class,["register"],[],"",false);
+        $signUp = new SignUp($userCredentialsValidator_stub, $userPost_stub);
+
+
+        $userPost_stub
+            ->expects($this->any())
+            ->method('register')
+            ->will(
+                $this->returnValue(
+                    new User('monesvol','728dedceccf7966e2f9465c1aea2068e4378ad95','monesvol@mpwar.com')
+                )
+            );
+
+        $user = $signUp('monesvol@mpwar.com', 'monesvol', 'S*cks');
+
+
+        $this->assertEquals(
+            new User('monesvol','728dedceccf7966e2f9465c1aea2068e4378ad95','monesvol@mpwar.com'),
+            $user,
+            'Shoul return a user: User { "email" : "monesvol@mpwar.com", "username" : "monesvol", "password" : "728dedceccf7966e2f9465c1aea2068e4378ad95" }'
+            );
     }
 
 

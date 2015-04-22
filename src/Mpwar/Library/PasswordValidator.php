@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mpwar\Auth\Library;
+namespace Mpwar\Library;
 
 
 class PasswordValidator {

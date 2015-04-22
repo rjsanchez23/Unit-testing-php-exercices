@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 21/04/2015
- * Time: 14:11
- */
 
-namespace Mpwar\Auth\Library;
+
+namespace Mpwar\Library;
 
 
 class UserCredentialsValidator

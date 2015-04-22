@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Mpwar\Auth\Library;
+namespace Mpwar\Library;
 
 
 class EmailValidator {
@@ -11,5 +11,7 @@ class EmailValidator {
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
             throw new \InvalidArgumentException('Invalid email');
         }
+
+        return true;
     }
 }
