@@ -1,5 +1,3 @@
-# MPWAR - Ricardo Sánchez
-> rjsanchezestevez@gmail.com
-
-## Set Up
-loquesea
+# Hanoi kata
+> Complex exercises can be unit-tested too
+> By Ricardo SÃ¡nchez
