@@ -4,17 +4,30 @@ namespace Mpwar\Hanoi;
 class Solver
 {
     public $movements;
+
     public function solve($disks)
     {
-        $this->movements = array();
-        if(1 == $disks){
-            $this->movements = array('#1 -> #3');
-        }
-        if(2 == $disks){
-            $this->movements = array('#1 -> #2', '#1 -> #3', '#2 -> #3');
-        }
 
+        $this->movements = array();
+        $this->hanoi($disks, "#1", "#2", "#3");
         return $this->movements;
+
+    }
+
+    private function hanoi($discks, $startStick, $auxiliarStick, $endStick)
+    {
+
+        if ($discks == 0) {
+
+            return;
+
+        } else {
+
+            $this->hanoi(($discks - 1), $startStick, $endStick, $auxiliarStick);
+            $this->movements[] = "$startStick -> $endStick";
+            $this->hanoi(($discks - 1), $auxiliarStick, $startStick, $endStick);
+
+        }
 
     }
 
