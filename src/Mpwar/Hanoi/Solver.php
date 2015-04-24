@@ -6,6 +6,7 @@ class Solver
     public $movements;
     public function solve($disks)
     {
+        $this->movements = array();
         if(1 == $disks){
             $this->movements = array('#1 -> #3');
         }
