@@ -13,8 +13,21 @@ final class SolverTest extends PHPUnit_Framework_TestCase
     {
         $solver = new Solver;
         $result = $solver->solve(1);
-        $this->assertEquals(array('#1 -> #3'),$result,"The movement should be one with one disk");
+        $this->assertEquals(array('#1 -> #3'), $result, "The movement should be one with one disk. Result should be: #'#1 -> #3', '#2 -> #3'");
 
     }
+
+    /** @test */
+    public function shouldSuccessIfSolvedWithThreeMovements()
+    {
+        $solver = new Solver;
+        $result = $solver->solve(2);
+        $this->assertEquals(
+            array('#1 -> #2', '#1 -> #3', '#2 -> #3'),
+            $result,
+            "The movements should be three with two disks. Result should be: #1 -> #2', '#1 -> #3', '#2 -> #3'");
+
+    }
+
 
 }
