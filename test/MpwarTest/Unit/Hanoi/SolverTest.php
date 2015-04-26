@@ -21,7 +21,7 @@ final class SolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function shouldSuccessIfMoveOneToThree()
+    public function shouldSuccessIfMoveOneToThreeWithOneDisk()
     {
         $solver = new Solver;
         $result = $solver->solve(1);
@@ -30,7 +30,7 @@ final class SolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function shouldSuccessIfSolvedWithThreeMovements()
+    public function shouldSuccessIfSolvedWithThreeMovementsWithTwoDisks()
     {
         $solver = new Solver;
         $result = $solver->solve(2);
@@ -42,7 +42,7 @@ final class SolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function shouldSuccessIfSolvedWithSevenMovements()
+    public function shouldSuccessIfSolvedWithSevenMovementsWithThreeDisks()
     {
         $solver = new Solver;
         $result = $solver->solve(3);
@@ -62,7 +62,7 @@ final class SolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function shouldSuccessIfSolvedWithxMovements()
+    public function shouldSuccessIfSolvedWithMovementsWithFiveDisks()
     {
         $solver = new Solver;
         $result = $solver->solve(5);
