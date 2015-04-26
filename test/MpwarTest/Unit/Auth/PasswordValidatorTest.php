@@ -8,7 +8,8 @@ use InvalidArgumentException;
 use Mpwar\Library\PasswordValidator;
 
 
-class PasswordValidatorTest extends \PHPUnit_Framework_TestCase{
+class PasswordValidatorTest extends \PHPUnit_Framework_TestCase
+{
 
     /** @test */
     public function shouldFailIfPasswordNotValid()
@@ -17,11 +18,13 @@ class PasswordValidatorTest extends \PHPUnit_Framework_TestCase{
         $password = 'S*cks';
         $passwordValidator = new PasswordValidator();
 
-        try{
-            $passwordValidator->validate($password);
-        }catch (InvalidArgumentException $e){
-            $this->assertEquals('Too short password',$e->getMessage());
-        }
+
+        $this->setExpectedException(
+            InvalidArgumentException::class,
+            'Too short password'
+        );
+        $passwordValidator->validate($password);
+
     }
 
 

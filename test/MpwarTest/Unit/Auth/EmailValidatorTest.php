@@ -18,16 +18,12 @@ class EmailValidatorTest extends \PHPUnit_Framework_TestCase{
         $email = 'monesvol@mpwar';
         $signUp = new EmailValidator;
 
-        try{
-            $result =  $signUp->validate($email);
-        }catch (InvalidArgumentException $e){
-            $this->assertEquals("Invalid email",$e->getMessage());
-        }
 
-        /*$this->setExpectedException(
+        $this->setExpectedException(
             InvalidArgumentException::class,
             'Invalid email'
-        );*/
+        );
+        $signUp->validate($email);
 
     }
 
