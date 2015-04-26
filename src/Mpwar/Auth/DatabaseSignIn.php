@@ -7,11 +7,10 @@ namespace Mpwar\Auth;
 use InvalidArgumentException;
 use Mpwar\Auth\Contracts\Database;
 use Mpwar\Auth\Contracts\Hasher;
-use Mpwar\Auth\Contracts\LogInInterface;
-use Mpwar\Auth\Contracts\SignInInterface;
-use Mpwar\ExternalService\UserDb;
+use Mpwar\Auth\Contracts\SignInStrategyInterface;
 
-class CustomeSignIn implements SignInInterface
+
+class DatabaseSignIn implements SignInStrategyInterface
 {
 
     private $database;
@@ -25,7 +24,7 @@ class CustomeSignIn implements SignInInterface
         $this->session = $session;
     }
 
-    public function execute($email_or_username, $password)
+    public function signIn($email_or_username, $password)
     {
         $this->session->isLoggedIn($email_or_username);
 
@@ -39,6 +38,5 @@ class CustomeSignIn implements SignInInterface
 
         return $user;
     }
-
 
 }

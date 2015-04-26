@@ -5,13 +5,13 @@ namespace Mpwar\Auth;
 
 
 use InvalidArgumentException;
-use Mpwar\Auth\Contracts\SignInInterface;
+use Mpwar\Auth\Contracts\SignInStrategyInterface;
 use Mpwar\ExternalService\UserDb;
 
-class ExternalServiceSignIn extends UserDb implements SignInInterface
+class ExternalServiceSignIn extends UserDb implements SignInStrategyInterface
 {
 
-    public function execute($email_or_username, $password)
+    public function signIn($email_or_username, $password)
     {
 
         if (!$user = $this->logIn($email_or_username, $password)) {

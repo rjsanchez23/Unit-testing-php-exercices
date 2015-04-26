@@ -3,22 +3,22 @@
 namespace Mpwar\Auth;
 
 
-use Mpwar\Auth\Contracts\SignInInterface;
+use Mpwar\Auth\Contracts\SignInStrategyInterface;
 
 final class SignIn
 {
-    private $database;
+    private $signInService;
 
 
-    public function __construct(SignInInterface $database)
+    public function __construct(SignInStrategyInterface $signInService)
     {
-        $this->database = $database;
+        $this->signInService = $signInService;
 
     }
 
     public function __invoke($email_or_username, $password)
     {
-        $user = $this->database->execute($email_or_username, $password);
+        $user = $this->signInService->signIn($email_or_username, $password);
 
         return $user;
     }

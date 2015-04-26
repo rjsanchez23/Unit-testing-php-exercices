@@ -5,20 +5,19 @@ namespace MpwarTest\Auth;
 use InvalidArgumentException,
     Mpwar\Auth\SignIn,
     Mpwar\Auth\User;
-use Mpwar\Auth\Contracts\SignInInterface;
+use Mpwar\Auth\Contracts\SignInStrategyInterface;
 
 class SignInTest extends \PHPUnit_Framework_TestCase
 {
     /** @test */
-
     public function shouldFailIfUsernameOrEmailDoesNotExist()
     {
-        $database_stub = $this->getMock(SignInInterface::class);
-        $signIn = new SignIn($database_stub);
+        $signInService_stub = $this->getMock(SignInStrategyInterface::class);
+        $signIn = new SignIn($signInService_stub);
 
-        $database_stub
+        $signInService_stub
             ->expects($this->any())
-            ->method('execute')
+            ->method('signIn')
             ->will($this->throwException(
                 new InvalidArgumentException('Non existent user')
             ));
@@ -32,15 +31,14 @@ class SignInTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-
     public function shouldSuccessUserIfLogInCorrectly()
     {
-        $database_stub = $this->getMock(SignInInterface::class);
-        $signIn = new SignIn($database_stub);
+        $signInService_stub = $this->getMock(SignInStrategyInterface::class);
+        $signIn = new SignIn($signInService_stub);
 
-        $database_stub
+        $signInService_stub
             ->expects($this->once())
-            ->method('execute')
+            ->method('signIn')
             ->will($this->returnValue(
                 new User('monesvol@mpwar.com', 'monesvol', '728dedceccf7966e2f9465c1aea2068e4378ad95')
             ));
