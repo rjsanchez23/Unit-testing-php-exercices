@@ -1,18 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Ricardo
- * Date: 29/04/2015
- * Time: 20:46
- */
+
 
 namespace Mpwar\Blog;
 
 
+use Mpwar\Blog\Validation\TitleValidator;
+
 class Posts {
 
-    public function createNew($headline, $body, $instant_publishing){
+    private $titleValidator;
 
+    public function __construct(TitleValidator $titleValidator){
+        $this->titleValidator = $titleValidator;
+    }
+    public function createNew($headline, $body, $instant_publishing){
+        $this->titleValidator->validate($headline);
     }
 
 }
