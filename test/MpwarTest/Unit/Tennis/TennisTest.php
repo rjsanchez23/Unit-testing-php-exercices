@@ -48,4 +48,38 @@ class TennisTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /** @test */
+    public function shouldSuccessIfAdvantagePlayerOne()
+    {
+
+        $match = new Match();
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_2);
+        $match->score(Match::PLAYER_2);
+        $match->score(Match::PLAYER_2);
+        $result = $match->score(Match::PLAYER_1);
+        $spectedResult = 'p1 advantage';
+        $this->assertEquals($spectedResult, $result, "The espectected result is advantage of player 1" );
+
+    }
+
+    /** @tes */
+    public function shouldSuccessIfAdvantagePlayerTwo()
+    {
+
+        $match = new Match();
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_2);
+        $match->score(Match::PLAYER_2);
+        $match->score(Match::PLAYER_2);
+        $result = $match->score(Match::PLAYER_2);
+        $spectedResult = 'p2 advantage';
+        $this->assertEquals($spectedResult, $result, "The espectected result is advantage of player 2" );
+
+    }
+
 }
