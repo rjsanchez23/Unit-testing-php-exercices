@@ -7,7 +7,9 @@ namespace Mpwar\Unit\Posts;
 use Mpwar\Blog\DataBase\PostRepository;
 use Mpwar\Blog\Exception\HeaderTooLong;
 use Mpwar\Blog\Exception\PublishingError;
+use Mpwar\Blog\Exception\SubscriptionNotificationError;
 use Mpwar\Blog\Posts;
+use Mpwar\Blog\Subscription\Notification;
 use Mpwar\Blog\Validation\TitleValidation;
 use Mpwar\Blog\ValueObject\Post;
 
@@ -17,8 +19,9 @@ class PostTests extends \PHPUnit_Framework_TestCase{
     public function shouldSuccessIfReturnsAPost(){
 
         $titleValidator_stab = $this->getMock(TitleValidation::class);
-        $postRepository_stab = $this->getMock(PostRepository::class,[]);
-        $posts = new Posts($titleValidator_stab, $postRepository_stab);
+        $postRepository_stab = $this->getMock(PostRepository::class);
+        $notification_stab = $this->getMock(Notification::class);
+        $posts = new Posts($titleValidator_stab, $postRepository_stab, $notification_stab);
         $post = $posts->createNew('headline', 'body', true);
 
         $espectedValue = new Post( 'headline', 'body' );
@@ -32,7 +35,8 @@ class PostTests extends \PHPUnit_Framework_TestCase{
 
         $titleValidator_stab = $this->getMock(TitleValidation::class,["validate"]);
         $postRepository_stab = $this->getMock(PostRepository::class);
-        $posts = new Posts($titleValidator_stab, $postRepository_stab);
+        $notification_stab = $this->getMock(Notification::class);
+        $posts = new Posts($titleValidator_stab, $postRepository_stab, $notification_stab);
         $titleValidator_stab
             ->method('validate')
             ->will(
@@ -55,7 +59,8 @@ class PostTests extends \PHPUnit_Framework_TestCase{
 
         $titleValidator_stab = $this->getMock(TitleValidation::class);
         $postRepository_stab = $this->getMock(PostRepository::class,["insert"]);
-        $posts = new Posts($titleValidator_stab, $postRepository_stab);
+        $notification_stab = $this->getMock(Notification::class);
+        $posts = new Posts($titleValidator_stab, $postRepository_stab, $notification_stab);
         $postRepository_stab
             ->expects($this->once())
             ->method('insert')
@@ -71,6 +76,31 @@ class PostTests extends \PHPUnit_Framework_TestCase{
         );
 
         $posts->createNew('headline', 'body', false);
+
+
+    }
+
+    /** @test */
+    public function shouldSuccessIfNotificationFails(){
+
+        $titleValidator_stab = $this->getMock(TitleValidation::class);
+        $postRepository_stab = $this->getMock(PostRepository::class);
+        $notification_stab = $this->getMock(Notification::class);
+        $posts = new Posts($titleValidator_stab, $postRepository_stab, $notification_stab);
+        $notification_stab
+            ->method('notifyNow')
+            ->will(
+                $this->throwException(
+                    new SubscriptionNotificationError('The notification has not been send, there was an error')
+                )
+            );
+
+        $this->setExpectedException(
+            SubscriptionNotificationError::class,
+            'The notification has not been send, there was an error'
+        );
+
+        $posts->createNew('headline', 'body', true);
 
 
     }
