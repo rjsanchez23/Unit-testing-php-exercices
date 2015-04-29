@@ -82,4 +82,20 @@ class TennisTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /** @test */
+    public function shouldSuccessIfAPlayerOneWin()
+    {
+
+        $match = new Match();
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+
+
+        $result = $match->score(Match::PLAYER_1);
+        $spectedResult = 'p1 game';
+        $this->assertEquals($spectedResult, $result, "The espectected result is player1 win" );
+
+    }
+
 }

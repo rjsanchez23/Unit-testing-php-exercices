@@ -10,7 +10,7 @@ class Match {
     const PLAYER_2 = "p2";
     const NORMAL_POINT = 15;
     const LAST_POINT = 10;
-    const ADVANTAGE = 50;
+    const ADVANTAGE_OR_WIN = 50;
     private $player1Points = 0;
     private $player2Points = 0;
 
@@ -20,6 +20,9 @@ class Match {
     {
         $this->incrementPoint($player);
 
+        if($player = $this->playerHasWinTheGame()){
+            return $player . " ". "game";
+        }
         if($player = $this->playerHasAdvantage()){
             return $player . " ". "advantage";
         }
@@ -34,9 +37,18 @@ class Match {
 
 
     public function playerHasAdvantage(){
-        if(50 == $this->player1Points && 40 == $this->player2Points){
+        if(self::ADVANTAGE_OR_WIN == $this->player1Points && 40 == $this->player2Points){
             return self::PLAYER_1;
-        }elseif(50 == $this->player2Points && 40 == $this->player1Points){
+        }elseif(self::ADVANTAGE_OR_WIN == $this->player2Points && 40 == $this->player1Points){
+            return self::PLAYER_2;
+        }
+        return false;
+    }
+
+    public function playerHasWinTheGame(){
+        if(self::ADVANTAGE_OR_WIN == $this->player1Points && 40 > $this->player2Points){
+            return self::PLAYER_1;
+        }elseif(self::ADVANTAGE_OR_WIN == $this->player2Points && 40 > $this->player1Points){
             return self::PLAYER_2;
         }
         return false;
