@@ -19,5 +19,15 @@ class TennisTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($spectedResult, $result, "The espectected result is that player 1 wins by 15" );
 
     }
+    /** @test */
+    public function shouldSuccessIfSecondPlayerWinsWithFiveTeen()
+    {
+
+        $match = new Match();
+        $result = $match->score(Match::PLAYER_2);
+        $spectedResult = 'p1 0 - p2 15';
+        $this->assertEquals($spectedResult, $result, "The espectected result is that player 2 wins by 15" );
+
+    }
 
 }
