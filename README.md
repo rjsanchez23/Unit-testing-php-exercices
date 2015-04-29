@@ -1,5 +1,3 @@
-# MPWAR - Ricardo S�nchez
-> rjsanchezestevez@gmail.com
+# Tenis facilón
+> by Ricardo Sánchez
 
-## Set Up
-loquesea
