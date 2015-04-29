@@ -30,4 +30,22 @@ class TennisTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /** @test */
+    public function shouldSuccessIfDeuce()
+    {
+
+        $match = new Match();
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+        $match->score(Match::PLAYER_1);
+
+        $match->score(Match::PLAYER_2);
+        $match->score(Match::PLAYER_2);
+
+        $result = $match->score(Match::PLAYER_2);
+        $spectedResult = 'deuce';
+        $this->assertEquals($spectedResult, $result, "The espectected result is deuce in the math" );
+
+    }
+
 }
