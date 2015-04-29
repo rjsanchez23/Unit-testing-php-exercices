@@ -27,6 +27,8 @@ class Posts {
         $this->postRepository->insert($post);
         if($instant_publishing){
             $this->notification->notifyNow($post);
+        }else{
+            $this->notification->addToQueue($post);
         }
 
         return $post;

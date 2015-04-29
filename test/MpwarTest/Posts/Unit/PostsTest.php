@@ -104,4 +104,29 @@ class PostTests extends \PHPUnit_Framework_TestCase{
 
 
     }
+
+    /** @test */
+    public function shouldSuccessIfPostNotAddedToQueue(){
+
+        $titleValidator_stab = $this->getMock(TitleValidation::class);
+        $postRepository_stab = $this->getMock(PostRepository::class);
+        $notification_stab = $this->getMock(Notification::class);
+        $posts = new Posts($titleValidator_stab, $postRepository_stab, $notification_stab);
+        $notification_stab
+            ->method('addToQueue')
+            ->will(
+                $this->throwException(
+                    new SubscriptionNotificationError('The Post has not benn add to te queue, there was an error')
+                )
+            );
+
+        $this->setExpectedException(
+            SubscriptionNotificationError::class,
+            'The Post has not benn add to te queue, there was an error'
+        );
+
+        $posts->createNew('headline', 'body', false);
+
+
+    }
 }
