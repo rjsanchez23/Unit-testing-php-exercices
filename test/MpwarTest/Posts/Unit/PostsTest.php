@@ -50,7 +50,7 @@ class PostTests extends \PHPUnit_Framework_TestCase{
 
 
     }
-
+    /** @test */
     public function shouldSuccessIfPostNotPersisted(){
 
         $titleValidator_stab = $this->getMock(TitleValidation::class);
