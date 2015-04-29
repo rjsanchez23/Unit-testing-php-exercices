@@ -20,12 +20,15 @@ class Match {
     {
         $this->incrementPoint($player);
 
-        if(40 == $this->player1Points && 40 == $this->player1Points){
-            return 'deuce';
-        }
         if($player = $this->playerHasAdvantage()){
             return $player . " ". "advantage";
         }
+        if(40 == $this->player1Points && 40 == $this->player1Points){
+
+            return 'deuce';
+        }
+
+
         return self::PLAYER_1 ." ". $this->player1Points . " - " . self::PLAYER_2 ." ". $this->player2Points;
     }
 

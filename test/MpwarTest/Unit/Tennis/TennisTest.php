@@ -65,7 +65,7 @@ class TennisTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /** @tes */
+    /** @test */
     public function shouldSuccessIfAdvantagePlayerTwo()
     {
 
