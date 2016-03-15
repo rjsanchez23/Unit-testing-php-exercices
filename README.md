@@ -1,5 +1,5 @@
-# MPWAR - Ricardo Sánchez
+# MPWAR - Ricardo SÃ¡nchez
 > rjsanchezestevez@gmail.com
 
 ## Set Up
-loquesea
+Ejercicios de UnitTesting en php (un ejercicio en cada rama)
